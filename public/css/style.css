@@ -2,7 +2,6 @@
 
 .flex {
     display: flex;
-    flex-wrap: wrap;
 }
 
 .row {
@@ -15,6 +14,10 @@
 
 .justify-space-evenly {
     justify-content: space-evenly;
+}
+
+.wrap {
+    flex-wrap: wrap;
 }
 
 /*.offreDecouvPalRou {*/
@@ -40,7 +43,10 @@ body {
 
 a {
     text-decoration: none;
+    grid-column: 2;
 }
+
+
 
 header {
     display: grid;
@@ -51,11 +57,11 @@ header {
     justify-items: center;
 }
 
-#returnHome {
-    display: flex;
-    grid-column: 3;
-    grid-row: 1;
-    position: relative;
+header > a {
+    grid-column: 2 /span 3;
+    background-color: rgba(234, 92, 191, 0.18);
+    border-radius: 50%;
+box-shadow: 0 0 2em #c868cd;
 }
 
 h1 {
@@ -64,34 +70,32 @@ h1 {
     color: #ff00db;
     text-decoration: underline 5%;
     font-size: 50px;
-    margin: 0;
     text-align: center;
     text-shadow: #c868cd 1px 3px 3px;
 }
 
-header > h1 {
+a > h1 {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
-    grid-column: 2 / span 3;
-    grid-row: -2;
     text-decoration: none;
-    height: 0;
     font-size: 80px;
 }
 
+a > img {
+    width: 30%;
+}
+
 nav {
-    display: flex;
-    grid-row: 6;
-    grid-column: 3;
     margin: 2.5%;
     height: 30px;
+    grid-column: 1 / span 5;
+    grid-row: -3;
 }
 
 nav > a {
-    margin: 0 5% 5% 0;
+    margin: 0 5%;
     text-decoration: none;
     font-family: 'Ephesis', sans-serif;
     font-size: 150%;
@@ -101,12 +105,13 @@ nav > a {
     border: solid #FF00DB;
     border-radius: 40%;
     height: 35px;
-    width: 250px;
+    width: 293px;
     box-shadow: 10px 10px 40px 40px #fcefff inset, 0 0 0 0 #fcefff;
     -webkit-transition: all 150ms ease-in-out;
     transition: all 0.3s ease-in-out;
 }
 
+/*Au survol d'un a contenu dans la nav*/
 nav > a:hover {
     color: #000000;
     background-color: #fcefff;
@@ -118,19 +123,26 @@ section {
     margin: 2%;
 }
 
+section > div {
+    align-items: center;
+}
+
+/* les images contenu dans une div elles mêmes contenues dans une section*/
 section > div > img {
-    display: inline-block;
     margin: 1%;
     border-radius: 50%;
 }
 
+/* les images contenu dans un a eux mêmes contenu dans une div*/
 div > a > img {
     border-radius: 25%;
 }
 
+div > img {
+    width: 30%;
+}
 
 p {
-    display: flex;
     align-items: center;
     font-style: italic;
     font-size: 25px;
@@ -156,6 +168,7 @@ li {
 
 }
 
+/*li premier enfant de ul puis second enfant etc.*/
 ul > li:first-child {
     color: #5E17EB;
     font-weight: bold;
@@ -183,18 +196,20 @@ ul > li:nth-child(4) {
     padding: 2.8% 0;
 }
 
-li:nth-child(5) {
-
+p > span {
+    width: 50%;
+    text-align: center;
+    font-weight: bold;
+    color: #FF00DB;
+    border: 2px solid #cb74bb;
+    border-radius: 40%;
+    margin-right: 5%;
 }
 
-li:nth-child(6) {
-
-}
-
-li:nth-child(7) {
-
-}
-
-li:last-child {
-
+hr {
+    border-style: dashed none none none;
+    border-width: 2px;
+    color: #FF00DB;
+    margin: auto 25%;
+    width: 50%;
 }
