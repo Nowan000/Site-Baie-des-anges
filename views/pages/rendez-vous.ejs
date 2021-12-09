@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des rendez-vous</title>
+
+    <script src="js/modifyRdvList.js" type="text/javascript" async></script>
+    <link rel="stylesheet" href="css/rdvlist.css"/>
+</head>
+
+<body>
+    <h1>Liste des rendez-vous</h1>
+    <form>
+        <ul>
+            <% rdvs.forEach((rdv) => { %>
+                <li>
+                    <% let id = rdv.id %>
+                    <%= rdv.nom_client %> -
+                    <%= rdv.prenom_client %> -
+                    <%= rdv.adresse_client %> -
+                    <%= rdv.mail_client %> -
+                    <%= rdv.phone_client %> -
+                    <%= rdv.date_rdv.toLocaleDateString() %> -
+                    <%= rdv.heure_rdv %>
+                    <input type="submit" value="Supprimer" id="<%= rdv.id %>"/>
+                </li>
+            <% }) %>
+        </ul>
+    </form>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p> Confirmez la suppression </p>
+            <button id="yes">Oui</button>
+            <button id="no">Non</button>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,14 +1,26 @@
-import dbRendezVous from "../db/rendezVousDb";
+import rendezVousDb from "../db/rendezVousDb";
 
-async function getAllRdv(req,res) {
-    let result = await dbRendezVous.getRdv();
-    res.status(200).render('pages/touslesrdv',{rdv: result.rows});
+async function getRdv(req, res) {
+    let result = await rendezVousDb.selectAllRdv();
+
+    res.status(200).render('pages/rendez-vous', {rdvs: result.rows});
 }
 
-async function addRdv(req,res) {
-    const { date, heure, id_client } = req.body;
+async function addRdv(req, res) {
+    const {nom, prenom, adresse, mail, phone, date, heure} = req.body;
 
-    if(nom !== null && heure !== null) {
-        const result = await rdvDb.addRdv(date, heure, idClient)
+    if (nom !== null && prenom !== null && adresse !== null && mail !== null && phone !== null && heure !== null && date !== null) {
+        const result = await rendezVousDb.insertRdv(nom, prenom, adresse, mail, phone, date, heure);
     }
 }
+
+async function removeOne(req, res) {
+    const id = req.body.id;
+    const result = await rendezVousDb.removeOne(id);
+}
+
+export default {
+    getRdv,
+    addRdv,
+    removeOne,
+};
