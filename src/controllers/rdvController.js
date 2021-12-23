@@ -19,8 +19,14 @@ async function removeOne(req, res) {
     const result = await rendezVousDb.removeOne(id);
 }
 
+async function updateRdv(req, res) {
+    const {nom, prenom, adresse, mail, phone, date, heure} = req.body;
+    const result = await rendezVousDb.updateRdv(nom, prenom, adresse, mail, phone, date, heure);
+}
+
 export default {
     getRdv,
     addRdv,
     removeOne,
+    updateRdv,
 };

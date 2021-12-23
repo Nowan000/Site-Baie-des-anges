@@ -3,37 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <title>Liste des rendez-vous</title>
-
-    <script src="js/modifyRdvList.js" type="text/javascript" async></script>
     <link rel="stylesheet" href="css/rdvlist.css"/>
+    <script src="js/modifyRdvList.js" type="text/javascript" async></script>
+
 </head>
 
 <body>
     <h1>Liste des rendez-vous</h1>
     <form>
-        <ul>
-            <% rdvs.forEach((rdv) => { %>
-                <li>
-                    <% let id = rdv.id %>
-                    <%= rdv.nom_client %> -
-                    <%= rdv.prenom_client %> -
-                    <%= rdv.adresse_client %> -
-                    <%= rdv.mail_client %> -
-                    <%= rdv.phone_client %> -
-                    <%= rdv.date_rdv.toLocaleDateString() %> -
-                    <%= rdv.heure_rdv %>
-                    <input type="submit" value="Supprimer" id="<%= rdv.id %>"/>
-                </li>
-            <% }) %>
-        </ul>
+        <table>
+            <thead>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Date</th>
+                <th>Heure</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <% rdvs.forEach((rdv) => { %>
+                    <tr id=<%= rdv.id %>>
+                        <td id="nom_client"><%= rdv.nom_client %> </td>
+                        <td id="prenom_client"><%= rdv.prenom_client %> </td>
+                        <td id="adresse_client"> <%= rdv.adresse_client %> </td>
+                        <td id="mail_client"><%= rdv.mail_client %> </td>
+                        <td id="phone_client"><%= rdv.phone_client %> </td>
+                        <td id="date_rdv"><%= rdv.date_rdv.toLocaleDateString() %> </td>
+                        <td id="heure_rdv"><%= rdv.heure_rdv %></td>
+                        <td><input type="submit" value="Supprimer" class="delete <%= rdv.id %>"/></td>
+                        <td><input type="submit" value="Modifier" class="update <%= rdv.id %>"/></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
     </form>
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p> Confirmez la suppression </p>
-            <button id="yes">Oui</button>
-            <button id="no">Non</button>
+    <div class="modal">
+        <div class="modal-delete">
+            <span class="close closeSpan">&times</span>
+            <p>Confirmez la suppression</p>
+            <div id="divButton">
+                <button id="yesDeleteBtn">Oui</button>
+                <button id="noDeleteBtn" class="close">Non</button>
+            </div>
+        </div>
+        <div class="modal-update">
+            <span class="close closeSpan">&times</span>
+            <div id="input">
+                <label> Nom <input type="text" name="nom"/></label>
+                <label> Prénom <input type="text" name="prenom"/></label>
+                <label> Adresse <input type="text" name="adresse"/></label>
+                <label> Email <input type="text" name="mail"/></label>
+                <label> Téléphone <input type="number" name="phone"/></label>
+                <label> Date <input type="date" name="date"/></label>
+                <label> Heure
+                    <select>
+                        <option value="">--:--</option>
+                        <option value="10:00">10h00</option>
+                        <option value="10:30">10h30</option>
+                        <option value="11:00">11h00</option>
+                        <option value="11:30">11h30</option>
+                    </select></label>
+            </div>
+            <p>Confirmez la modification</p>
+            <div id="divButton">
+                <button id="yesUpdateBtn">Oui</button>
+                <button id="noUpdateBtn" class="close">Non</button>
+            </div>
         </div>
     </div>
+
 </body>
 </html>

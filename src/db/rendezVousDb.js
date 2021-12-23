@@ -21,9 +21,17 @@ const removeOne = async (id) => {
     );
 }
 
+const updateRdv = async (id, nom, prenom, adresse, mail, phone, date, heure) => {
+    const connection = new DbConnection();
+    return await connection.performQuery(
+        "UPDATE `rendez_vous` SET `nom_client`=(?), `prenom_client`=(?), `adresse_client`=(?), `mail_client`=(?), `phone_client`=(?), `date_rdv`=(?),`heure_rdv`=(?) WHERE id=(?)"
+        , [id, nom, prenom, adresse, mail, phone, date, heure]
+    );
+}
 
 export default {
     selectAllRdv,
     insertRdv,
     removeOne,
+    updateRdv,
 }
