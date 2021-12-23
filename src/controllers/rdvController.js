@@ -20,8 +20,8 @@ async function removeOne(req, res) {
 }
 
 async function updateRdv(req, res) {
-    const {nom, prenom, adresse, mail, phone, date, heure} = req.body;
-    const result = await rendezVousDb.updateRdv(nom, prenom, adresse, mail, phone, date, heure);
+    const {nom, prenom, adresse, mail, phone, date, heure, id} = req.body;
+    const result = await rendezVousDb.updateRdv(nom, prenom, adresse, mail, phone, date, heure, id);
 }
 
 export default {

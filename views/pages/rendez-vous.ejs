@@ -30,7 +30,7 @@
                         <td id="adresse_client"> <%= rdv.adresse_client %> </td>
                         <td id="mail_client"><%= rdv.mail_client %> </td>
                         <td id="phone_client"><%= rdv.phone_client %> </td>
-                        <td id="date_rdv"><%= rdv.date_rdv.toLocaleDateString() %> </td>
+                        <td id="date_rdv" formatDate="<%=rdv.date_rdv.toLocaleDateString('en-CA')%>"><%= rdv.date_rdv.toLocaleDateString() %> </td>
                         <td id="heure_rdv"><%= rdv.heure_rdv %></td>
                         <td><input type="submit" value="Supprimer" class="delete <%= rdv.id %>"/></td>
                         <td><input type="submit" value="Modifier" class="update <%= rdv.id %>"/></td>
