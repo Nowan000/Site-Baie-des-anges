@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Ephesis&display=swap');
+
+.flex {
+    display: flex;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.justify-space-evenly {
+    justify-content: space-evenly;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.offreDecouvPalRou {
+    background: no-repeat url("../media/image/thumbnail_20201122_170733.jpg");
+}
+
+/*.offreDecouvMassageEnceinte {*/
+/*    background: no-repeat url("");*/
+/*}*/
+
+/*.offreDecouvPierreChaude {*/
+/*    background: no-repeat url("");*/
+/*}*/
+
+* {
+    padding: 1%;
+    margin: 0;
+}
+
+body {
+    background-color: #fcefff;
+}
+
+#logo {
+    width: 30%;
+}
+
+a {
+    text-decoration: none;
+    grid-column: 2;
+}
+
+
+header {
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 20% 20% 20% 20% 20%;
+    align-items: start;
+
+    justify-items: center;
+}
+
+header > a {
+    grid-column: 2 /span 3;
+    background-color: rgba(234, 92, 191, 0.18);
+    border-radius: 50%;
+    box-shadow: 0 0 3em #846900;
+}
+
+h1 {
+    font-family: Ephesis, sans-serif;
+    display: block;
+    color: #ff00db;
+    text-decoration: underline 5%;
+    font-size: 130px;
+    text-align: center;
+    text-shadow: #8b7700 1px 3px 3px;
+
+}
+
+a > h1 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 130px;
+}
+
+a > img {
+    width: 300px;
+}
+
+nav {
+    margin: 2.5%;
+    height: 30px;
+    grid-column: 1 / span 5;
+    grid-row: -3;
+}
+
+nav > a {
+    margin: 0 5%;
+    text-decoration: none;
+    font-family: 'Ephesis', sans-serif;
+    font-size: 150%;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    border: solid #FF00DB;
+    border-radius: 40%;
+    height: 35px;
+    width: 310px;
+    box-shadow: 10px 10px 40px 40px #fcefff inset, 0 0 0 0 #fcefff;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+/*Au survol d'un a contenu dans la nav*/
+nav > a:hover {
+    color: #000000;
+    background-color: #fcefff;
+    border-radius: 25%;
+    box-shadow: 0 0 3px 0 #fcefff inset, 0 0 6px 4px #FF00DB;
+}
+
+section {
+    margin: 2%;
+}
+
+section > div {
+    align-items: center;
+}
+
+/* les images contenu dans une div elles mêmes contenues dans une section*/
+section > div > img {
+    margin: 1%;
+    border-radius: 50%;
+}
+
+/* les images contenu dans un a eux mêmes contenu dans une div*/
+div > a > img {
+    border-radius: 25%;
+}
+
+div > img {
+    width: 340px;
+}
+
+p {
+    align-items: center;
+    font-style: italic;
+    font-size: 25px;
+}
+
+ul {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-evenly;*/
+
+    border: solid 12px #E97482;
+    border-radius: 50%;
+    /*text-align: center;*/
+}
+
+li {
+    font-family: "Roboto Light", sans-serif;
+    padding: 0 0 0.5% 0;
+    list-style-type: none;
+    text-align: center;
+
+}
+
+/*li premier enfant de ul puis second enfant etc.*/
+ul > li:first-child {
+    color: #5E17EB;
+    font-weight: bold;
+    font-size: 35px;
+
+}
+
+ul > li:nth-child(2) {
+    color: #004AAD;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+ul > li:nth-child(3) {
+    color: #FF914D;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+ul > li:nth-child(4) {
+    color: #FF00DB;
+    font-family: 'Ephesis', sans-serif;
+    font-size: 51px;
+    padding: 2.8% 0;
+}
+
+p > span {
+    width: 50%;
+    text-align: center;
+    font-weight: bold;
+    color: #FF00DB;
+    border: 2px solid #cb74bb;
+    border-radius: 40%;
+    margin-right: 5%;
+}
+
+hr {
+    border-style: dashed none none none;
+    border-width: 2px;
+    color: #FF00DB;
+    margin: auto 25%;
+    width: 50%;
+}

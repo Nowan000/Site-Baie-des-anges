@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/rdvManager.js" async></script>
+    <link rel="icon" type="image/png" href="../media/image/logo_final.png" />
+    <title>Baie des anges</title>
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="flex">
+            <img id="logo" src="../media/image/logo_final.png" alt="">
+            <h1>Baie des anges</h1>
+        </a>
+
+        <nav class="flex row">
+            <a href="../index.html">
+                Accueil
+            </a>
+            <a href="mes-prestations.html">
+                Mes prestations
+            </a>
+            <a href="mes-partenaires.html">
+                Mes partenaires
+            </a>
+            <a href="guidance.html">
+                Guidance spirituelle
+            </a>
+        </nav>
+    </header>
+
+    <section>
+        <h1>Prendre rendez-vous</h1>
+        <div class="flex row">
+            <img src="../media/image/aliments-sains.png" alt="">
+            <form action="http://localhost:8080/addRdv" method="POST">
+                <label>Nom<input name="nom" type="text"/></label>
+                <label>Prénom<input name="prenom" type="text"/></label>
+                <label>Adresse<input name="adresse" type="text"/></label>
+                <label>Adresse e-mail<input name="mail" type="email"/></label>
+                <label>Téléphone<input name="phone" type="number"/></label>
+                <label>Date<input name="date" type="date"/></label>
+                <label>Choisissez l'heure de votre rendez-vous
+                    <select name="heure">
+                        <option value="">--:--</option>
+                        <option value="10:00">10h00</option>
+                        <option value="10:30">10h30</option>
+                        <option value="11:00">11h00</option>
+                        <option value="11:30">11h30</option>
+                    </select>
+                </label>
+                <input type="submit" value="Prendre rendez-vous"/>
+            </form>
+        </div>
+    </section>
+
+
+</body>
+</html>
