@@ -7,10 +7,9 @@ async function getRdv(req, res) {
 }
 
 async function addRdv(req, res) {
-    const {nom, prenom, adresse, mail, phone, date, heure} = req.body;
-
-    if (nom !== null && prenom !== null && adresse !== null && mail !== null && phone !== null && heure !== null && date !== null) {
-        const result = await rendezVousDb.insertRdv(nom, prenom, adresse, mail, phone, date, heure);
+    const {nom, prenom, adresse, mail, phone, date, heure, prestation} = req.body;
+    if (nom !== null && prenom !== null && adresse !== null && mail !== null && phone !== null && heure !== null && date !== null && prestation !== null) {
+        const result = await rendezVousDb.insertRdv(nom, prenom, adresse, mail, phone, date, heure, prestation);
     }
 }
 
@@ -20,8 +19,8 @@ async function removeOne(req, res) {
 }
 
 async function updateRdv(req, res) {
-    const {nom, prenom, adresse, mail, phone, date, heure, id} = req.body;
-    const result = await rendezVousDb.updateRdv(nom, prenom, adresse, mail, phone, date, heure, id);
+    const {nom, prenom, adresse, mail, phone, date, heure, prestation, id} = req.body;
+    const result = await rendezVousDb.updateRdv(nom, prenom, adresse, mail, phone, date, heure, prestation, id);
 }
 
 export default {

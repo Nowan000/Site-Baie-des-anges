@@ -5,7 +5,8 @@ const inpAddress = document.querySelector('input[name="adresse"]');
 const inpDate = document.querySelector('input[name="date"]');
 const inpMail = document.querySelector('input[name="mail"]');
 const inpPhone = document.querySelector('input[name="phone"]');
-const inpTime = document.querySelector('select');
+const selectPresta = document.querySelector('select[name="prestation"]');
+const selectTime = document.querySelector('select[name="heure"]');
 
 formRdv.addEventListener('submit', e => {
     e.preventDefault();
@@ -19,9 +20,10 @@ objectToParse = () => {
     let prenom = inpFirstName.value;
     let adresse = inpAddress.value;
     let date = inpDate.value;
-    let heure = inpTime.value;
+    let heure = selectTime.value;
     let mail = inpMail.value;
     let phone = inpPhone.value;
+    let prestation = selectPresta.value;
 
     return (
         rdv = {
@@ -32,6 +34,7 @@ objectToParse = () => {
             phone: phone,
             date: date,
             heure: heure,
+            prestation: prestation,
         }
     );
 }
@@ -45,13 +48,14 @@ jsonToSend = (objToSend) => {
         phone: objToSend.phone,
         date: objToSend.date,
         heure: objToSend.heure,
+        prestation: objToSend.prestation,
     }));
 }
 
 send = (toSend) => {
+    console.log(toSend);
     let send = new XMLHttpRequest();
     send.open(formRdv.method, formRdv.action, true);
     send.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
     send.send(toSend);
-    console.log(toSend);
 }

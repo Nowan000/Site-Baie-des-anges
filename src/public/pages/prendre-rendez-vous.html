@@ -36,19 +36,28 @@
         <div class="flex row">
             <img src="../media/image/aliments-sains.png" alt="">
             <form action="http://localhost:8080/addRdv" method="POST">
-                <label>Nom<input name="nom" type="text"/></label>
-                <label>Prénom<input name="prenom" type="text"/></label>
-                <label>Adresse<input name="adresse" type="text"/></label>
-                <label>Adresse e-mail<input name="mail" type="email"/></label>
-                <label>Téléphone<input name="phone" type="number"/></label>
-                <label>Date<input name="date" type="date"/></label>
+                <label>Nom<input name="nom" type="text" required/></label>
+                <label>Prénom<input name="prenom" type="text" required/></label>
+                <label>Adresse<input name="adresse" type="text" required/></label>
+                <label>Adresse e-mail<input name="mail" type="email" required/></label>
+                <label>Téléphone<input name="phone" type="number" required/></label>
+                <label>Date<input name="date" type="date" required/></label>
                 <label>Choisissez l'heure de votre rendez-vous
-                    <select name="heure">
+                    <select name="heure" required>
                         <option value="">--:--</option>
                         <option value="10:00">10h00</option>
                         <option value="10:30">10h30</option>
                         <option value="11:00">11h00</option>
                         <option value="11:30">11h30</option>
+                    </select>
+                </label>
+                <label>Choisissez votre massage :
+                    <select name="prestation" required>
+                        <option value=""></option>
+                        <option value="Massage californien">Massage californien</option>
+                        <option value="Massage shirotchampi">Massage shirotchampi</option>
+                        <option value="Massage femmes enceinte">Massage femmes enceinte</option>
+                        <option value="Massage pierres chaudes">Massage pierres chaudes</option>
                     </select>
                 </label>
                 <input type="submit" value="Prendre rendez-vous"/>

@@ -12,17 +12,17 @@ const inputAdresse = document.querySelector('input[name="adresse"]');
 const inputMail = document.querySelector('input[name="mail"]');
 const inputPhone = document.querySelector('input[name="phone"]');
 const inputDate = document.querySelector('input[name="date"]');
-const hourSelect = modalUpdate.querySelector('select');
-let oldNom, oldPrenom, oldAdresse, oldMail, oldPhone, oldDate, oldHeure;
+const hourSelect = modalUpdate.querySelector('select[name="heure"]');
+const prestaSelect = modalUpdate.querySelector('select[name="prestation"]')
+let oldNom, oldPrenom, oldAdresse, oldMail, oldPhone, oldDate, oldHeure, oldPresta;
 let toUpdate;
 
 
-//évènement qui appelle la suppression d'une entrée
+
 formRdv.addEventListener('submit', e => {
     e.preventDefault();
     let id = e.submitter.classList[1];
     let mode = e.submitter.classList[0];
-
 
     if (mode === "delete") {
         modal.style.display = 'block';
@@ -30,27 +30,30 @@ formRdv.addEventListener('submit', e => {
 
     } else if (mode === 'update') {
 
+        //affichage de la modale
         modal.style.display = 'block';
         modalUpdate.style.display = 'block';
 
-        oldNom = document.querySelector('#nom_client').innerHTML;
-        oldPrenom = document.querySelector('#prenom_client').innerHTML;
-        oldAdresse = document.querySelector('#mail_client').innerHTML;
-        oldMail = document.querySelector('#mail_client').innerHTML;
-        oldPhone = document.querySelector('#phone_client').innerHTML;
-        oldDate = document.querySelector('#date_rdv').attributes.formatDate.value;
-
-        console.log(oldDate);
-        oldHeure = document.querySelector('#heure_rdv').innerHTML;
-
+        //récupération des anciennes informations du rendez-vous
+        oldNom = document.querySelector('.nom_client').innerHTML;
+        oldPrenom = document.querySelector('.prenom_client').innerHTML;
+        oldAdresse = document.querySelector('.mail_client').innerHTML;
+        oldMail = document.querySelector('.mail_client').innerHTML;
+        oldPhone = document.querySelector('.phone_client').innerHTML;
+        oldDate = document.querySelector('.date_rdv').attributes.formatDate.value;
+        oldHeure = document.querySelector('.heure_rdv').innerHTML;
+        oldPresta = document.querySelector('.prestation').innerHTML;
     }
 
+    //Évènement au clic sur le bouton "Oui" de la modale.
     yesDeleteBtn.addEventListener('click', () => {
-        sendDelete(toJson(mode, id));
-
+        //Envois de l'id vers la méthode toJson() puis le JSON vers la méthode send()
+        send(mode, toJson(mode, id));
     });
 
+    //Évènement au clic sur le bouton "Oui" de la modale.
     yesUpdateBtn.addEventListener('click', e => {
+        //récupération des informations modifiées
         let nom = inputNom.value;
         let prenom = inputPrenom.value;
         let adresse = inputAdresse.value;
@@ -58,17 +61,19 @@ formRdv.addEventListener('submit', e => {
         let phone = inputPhone.value;
         let date = inputDate.value;
         let heure = hourSelect.value;
+        let prestation = prestaSelect.value;
 
-        console.log(mail);
+        //comparaison entre les anciennes et les nouvelles informations
         let upNom = (nom.trim() === "") ? oldNom : nom;
         let upPrenom = (prenom.trim() === "") ? oldPrenom : prenom;
         let upAdresse = (adresse.trim() === "") ? oldAdresse : adresse;
         let upMail = (mail.trim() === "") ? oldMail : mail;
         let upPhone = (phone.trim() === "") ? oldPhone : phone;
         let upDate = (date.trim() === "") ? oldDate : date;
-        let upHeure = (heure.trim() === "") ? oldHeure : heure;
+        let upHeure = (heure === "") ? oldHeure : heure;
+        let upPresta = (prestation === "") ? oldPresta: prestation;
 
-        console.log(upMail);
+        //création d'un objet contenant toutes les informations après comparaison pour éviter des champs vides
         let toUpdate = {
             id: id,
             nom: upNom,
@@ -78,14 +83,62 @@ formRdv.addEventListener('submit', e => {
             phone: upPhone,
             date: upDate,
             heure: upHeure,
+            prestation: upPresta,
         }
-
-        sendUpdate(toJson('update', toUpdate));
+        //envois de l'objet vers la méthode toJson() puis du JSON vers la méthode send()
+        send(mode, toJson(mode, toUpdate));
     });
 
     closeModal(mode);
 });
 
+
+toJson = (type, toParse) => {
+    //le type 'delete' convertit l'id en objet JSON et retourne cet objet avec
+    if (type === 'delete') {
+        return (JSON.stringify({
+            id: toParse,
+        }));
+    }
+    //le type 'update' converti les informations modifiées en objet JSON et retourne cet objet
+    if (type === 'update') {
+        console.log(toParse);
+        return (JSON.stringify({
+            nom: toParse.nom,
+            prenom: toParse.prenom,
+            adresse: toParse.adresse,
+            mail: toParse.mail,
+            phone: toParse.phone,
+            date: toParse.date,
+            heure: toParse.heure,
+            prestation: toParse.prestation,
+            id: toParse.id,
+        }));
+    }
+}
+
+// Retarde le rechargement de la page pour laisser le temps d'envoyer la requête vers le serveur
+delayReload = (timer) => {
+    window.setTimeout(function() {
+        location.reload()
+    }, timer);
+}
+
+//envoi du JSON contenant l'id du rendez-vous à supprimer
+send = (mode, toSend) => {
+    let send = new XMLHttpRequest(); //création de la requête
+    if (mode === "delete") {
+        send.open('POST', '/removeRdv', true); // défini la méthode et l'url de la requête
+    } else if (mode === 'update') {
+//envoi du JSON contenant les informations du rendez-vous qui ont été modifiées
+        send.open('POST', '/updateRdv', true);        
+    }
+    send.setRequestHeader('Content-Type', 'application/json; charset=UTF-8'); // en-tête de la requête
+        send.send(toSend);    //envoi de la requête, toSend contient l'id à supprimer sous forme de json
+        delayReload(500);
+}
+
+//Fermer la modale
 closeModal = (mode) => {
     const closeElements = document.querySelectorAll('.close');
     closeElements.forEach(element => {
@@ -117,47 +170,4 @@ closeModal = (mode) => {
             }
         }
     });
-}
-
-//conversion de l'id à supprimer en JSON
-toJson = (type, toParse) => {
-    if (type === 'delete') {
-        return (JSON.stringify({
-            id: toParse,
-        }));
-    }
-    if (type === 'update') {
-        return (JSON.stringify({
-            nom: toParse.nom,
-            prenom: toParse.prenom,
-            adresse: toParse.adresse,
-            mail: toParse.mail,
-            phone: toParse.phone,
-            date: toParse.date,
-            heure: toParse.heure,
-            id: toParse.id,
-        }));
-    }
-}
-
-delayReload = (timer) => {
-    window.setTimeout(function() {
-        location.reload()
-    }, timer);
-}
-
-sendDelete = (toSend) => {
-    let send = new XMLHttpRequest(); //création de la requête
-    send.open('POST', '/removeRdv', true); // défini la méthode et l'url de la requête
-    send.setRequestHeader('Content-Type', 'application/json; charset=UTF-8'); // en-tête de la requête
-    send.send(toSend);    //envoi de la requête, toSend contient l'id à supprimer sous forme de json
-    delayReload(500);
-}
-
-sendUpdate = (toSend) => {
-    let send = new XMLHttpRequest();
-    send.open('POST', '/updateRdv', true);
-    send.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-    send.send(toSend);
-    delayReload(500);
 }

@@ -20,18 +20,20 @@
                 <th>Téléphone</th>
                 <th>Date</th>
                 <th>Heure</th>
+                <th>Prestation</th>
                 <th></th>
             </thead>
             <tbody>
                 <% rdvs.forEach((rdv) => { %>
-                    <tr id=<%= rdv.id %>>
-                        <td id="nom_client"><%= rdv.nom_client %> </td>
-                        <td id="prenom_client"><%= rdv.prenom_client %> </td>
-                        <td id="adresse_client"> <%= rdv.adresse_client %> </td>
-                        <td id="mail_client"><%= rdv.mail_client %> </td>
-                        <td id="phone_client"><%= rdv.phone_client %> </td>
-                        <td id="date_rdv" formatDate="<%=rdv.date_rdv.toLocaleDateString('en-CA')%>"><%= rdv.date_rdv.toLocaleDateString() %> </td>
-                        <td id="heure_rdv"><%= rdv.heure_rdv %></td>
+                    <tr id=<%= rdv.id %> >
+                        <td class="nom_client"><%= rdv.nom_client %> </td>
+                        <td class="prenom_client"><%= rdv.prenom_client %> </td>
+                        <td class="adresse_client"> <%= rdv.adresse_client %> </td>
+                        <td class="mail_client"><%= rdv.mail_client %> </td>
+                        <td class="phone_client"><%= rdv.phone_client %> </td>
+                        <td class="date_rdv" formatDate="<%=rdv.date_rdv.toLocaleDateString('en-CA')%>"><%= rdv.date_rdv.toLocaleDateString() %> </td>
+                        <td class="heure_rdv"><%= rdv.heure_rdv %></td>
+                        <td class="prestation"><%= rdv.prestation %> </td>
                         <td><input type="submit" value="Supprimer" class="delete <%= rdv.id %>"/></td>
                         <td><input type="submit" value="Modifier" class="update <%= rdv.id %>"/></td>
                     </tr>
@@ -58,13 +60,23 @@
                 <label> Téléphone <input type="number" name="phone"/></label>
                 <label> Date <input type="date" name="date"/></label>
                 <label> Heure
-                    <select>
+                    <select name="heure">
                         <option value="">--:--</option>
                         <option value="10:00">10h00</option>
                         <option value="10:30">10h30</option>
                         <option value="11:00">11h00</option>
                         <option value="11:30">11h30</option>
-                    </select></label>
+                    </select>
+                </label>
+                <label>Choisissez votre massage :
+                    <select name="prestation">
+                        <option value=""></option>
+                        <option value="Massage californien">Massage californien</option>
+                        <option value="Massage shirotchampi">Massage shirotchampi</option>
+                        <option value="Massage femmes enceinte">Massage femmes enceinte</option>
+                        <option value="Massage pierres chaudes">Massage pierres chaudes</option>
+                    </select>
+                </label>
             </div>
             <p>Confirmez la modification</p>
             <div id="divButton">
